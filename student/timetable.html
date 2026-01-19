@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +7,13 @@
   <title>Time Table</title>
 
   <link rel="stylesheet" href="../assets/css/common.css">
+
+  <style>
+    .day-tabs button.active {
+      background-color: #007bff;
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
 
@@ -31,8 +37,6 @@
       <button onclick="openDay('fri', this)">Fri</button>
       <button onclick="openDay('sat', this)">Sat</button>
     </div>
-
-    <!-- ================= DAYS ================= -->
 
     <!-- MONDAY -->
     <div class="day-card" id="mon">
@@ -66,14 +70,12 @@
     <!-- WED -->
     <div class="day-card" id="wed" style="display:none;">
       <div class="day-title">Wednesday</div>
-
       <div class="slot"><div class="slot-time">09:30 – 04:20</div><div class="slot-subject">CODECHEF</div></div>
     </div>
 
     <!-- THU -->
     <div class="day-card" id="thu" style="display:none;">
       <div class="day-title">Thursday</div>
-
       <div class="slot"><div class="slot-time">09:30 – 11:20</div><div class="slot-subject">OS – TP</div></div>
       <div class="recess">Recess 11:20 – 12:20</div>
       <div class="slot"><div class="slot-time">12:20 – 02:10</div><div class="slot-subject">PPFD – RK</div></div>
@@ -82,7 +84,6 @@
     <!-- FRI -->
     <div class="day-card" id="fri" style="display:none;">
       <div class="day-title">Friday</div>
-
       <div class="slot"><div class="slot-time">09:30 – 10:25</div><div class="slot-subject">LIBRARY</div></div>
       <div class="recess">Recess 11:20 – 12:20</div>
       <div class="slot"><div class="slot-time">12:20 – 02:10</div><div class="slot-subject">OS – TP</div></div>
@@ -93,12 +94,39 @@
     <!-- SAT -->
     <div class="day-card" id="sat" style="display:none;">
       <div class="day-title">Saturday</div>
-
       <div class="slot"><div class="slot-time">09:30 – 10:25</div><div class="slot-subject">NSC – KB</div></div>
       <div class="slot"><div class="slot-time">10:25 – 11:20</div><div class="slot-subject">PPFD – RK</div></div>
       <div class="slot"><div class="slot-time">12:20 – 01:15</div><div class="slot-subject">PAULO ALTO – AJ</div></div>
       <div class="slot"><div class="slot-time">02:30 – 04:20</div><div class="slot-subject">CRY – DC</div></div>
     </div>
+
+  </div>
+</div>
+
+<!-- ===== JAVASCRIPT FIX ===== -->
+<script>
+function openDay(dayId, btn) {
+  // Hide all day cards
+  document.querySelectorAll('.day-card').forEach(card => {
+    card.style.display = 'none';
+  });
+
+  // Show selected day
+  document.getElementById(dayId).style.display = 'block';
+
+  // Remove active class from all buttons
+  document.querySelectorAll('.day-tabs button').forEach(button => {
+    button.classList.remove('active');
+  });
+
+  // Add active class to clicked button
+  btn.classList.add('active');
+}
+</script>
+
+</div>
+</div>
+
 
     <!-- ================= STAFF DETAILS ================= -->
 <div class="day-card">
@@ -147,4 +175,7 @@
   </div>
 
 </div>
+  
+  </body>
+</html>
 
