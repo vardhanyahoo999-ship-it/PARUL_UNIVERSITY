@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: student-erp
+    env: php
+    plan: free
+    buildCommand: ""
+    startCommand: ""

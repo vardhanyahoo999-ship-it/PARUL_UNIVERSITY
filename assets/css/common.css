@@ -1,0 +1,1400 @@
+/* ================= MOBILE LOCK ================= */
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;              /* 🚫 no horizontal scroll */
+  background: #f2f4f7;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto;
+}
+
+* {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+/* ================= DASHBOARD LAYOUT ================= */
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== TOP HEADER ===== */
+.dashboard-header {
+  background: #000;
+  color: #fff;
+  padding: 16px;
+  border-bottom-left-radius: 22px;
+  border-bottom-right-radius: 22px;
+}
+
+.dashboard-header .college {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.dashboard-header .name {
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.dashboard-header .meta {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.dashboard-header .meta div {
+  text-align: center;
+}
+
+/* ===== DASHBOARD CONTENT ===== */
+.dashboard-content {
+  padding: 16px;
+}
+
+/* ===== CARD GRID ===== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px 8px;
+  text-align: center;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #111;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+.card i {
+  display: block;
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+/* ===== ICON COLORS ===== */
+.i-cal   { color: #06b6d4; }
+.i-time  { color: #3b82f6; }
+.i-att   { color: #6366f1; }
+.i-bus   { color: #f59e0b; }
+.i-exam  { color: #8b5cf6; }
+.i-res   { color: #ef4444; }
+.i-fee   { color: #22c55e; }
+.i-feed  { color: #64748b; }
+.i-noti  { color: #f97316; }
+.i-host  { color: #0ea5e9; }
+
+/* ===== FOOTER ===== */
+.app-version {
+  text-align: center;
+  font-size: 12px;
+  color: #777;
+  padding: 16px 0 10px;
+}
+/* ================= ACADEMIC CALENDAR ================= */
+
+.academic-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header stays fixed */
+.academic-header {
+  background: #000;
+  color: #fff;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.academic-header a {
+  color: #fff;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+/* Only THIS scrolls */
+.academic-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 14px;
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding-left: 34px;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: #cde7df;
+}
+
+/* Each event */
+.event {
+  position: relative;
+  margin-bottom: 18px;
+  display: flex;
+  gap: 12px;
+}
+
+.event-dot {
+  position: absolute;
+  left: -34px;
+  width: 32px;
+  height: 32px;
+  background: #cde7df;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #198754;
+  font-size: 16px;
+}
+
+/* Event card */
+.event-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  width: 100%;
+}
+
+.event-date {
+  display: inline-block;
+  background: #e6f4f1;
+  color: #0f766e;
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 6px;
+}
+
+.event-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #222;
+}
+/* ================= ATTENDANCE UI ================= */
+
+/* Top percentage card */
+.att-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.att-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.att-sub {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+/* Progress bar */
+.att-bar {
+  width: 100%;
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.att-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg,#16a34a,#22c55e);
+}
+
+/* Percentage text */
+.att-percent {
+  font-size: 20px;
+  font-weight: 700;
+  color: #16a34a;
+}
+
+/* Status summary */
+.att-status-box {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: 13px;
+}
+
+.att-ok {
+  background: #ecfdf5;
+  color: #166534;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.att-bad {
+  background: #fef2f2;
+  color: #991b1b;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.att-mid {
+  background: #fffbeb;
+  color: #92400e;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.att-info {
+  background: #f1f5f9;
+  color: #334155;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.att-legend {
+  font-size: 12px;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+/* Attendance table */
+.att-table {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+.att-header,
+.att-row {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(5, 1fr);
+}
+
+.att-header {
+  background: #f3f4f6;
+  font-weight: 600;
+}
+
+.att-row {
+  border-top: 1px solid #eee;
+}
+
+.att-col {
+  padding: 10px 6px;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Slot styles */
+.att-slot-p {
+  background: #dcfce7;
+  color: #166534;
+  font-weight: 700;
+  border-radius: 6px;
+}
+
+.att-slot-a {
+  background: #fee2e2;
+  color: #991b1b;
+  font-weight: 700;
+  border-radius: 6px;
+}
+
+.att-slot-n {
+  background: #f1f5f9;
+  color: #64748b;
+  border-radius: 6px;
+}
+
+/* Subject cards */
+.sub-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.sub-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.sub-info {
+  font-size: 12px;
+  color: #555;
+  margin-top: 6px;
+}
+/* ================= FEES PAGE ================= */
+
+.fees-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.fees-header {
+  background: #000;
+  color: #fff;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.fees-header a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+/* only this scrolls */
+.fees-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 14px;
+}
+
+/* section card */
+.fees-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  margin-bottom: 16px;
+}
+
+.fees-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* fee rows */
+.fee-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-size: 13px;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.fee-row:last-child {
+  border-bottom: none;
+}
+
+.fee-label {
+  color: #555;
+}
+
+.fee-value {
+  text-align: right;
+  font-weight: 600;
+}
+
+/* semester / hostel blocks */
+.fee-block {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+.fee-block-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+/* total highlight */
+.fee-total {
+  background: #f1f5f9;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+}
+/* ================= FEES LEDGER ================= */
+
+.fees-header {
+  justify-content: space-between;
+}
+
+.fees-header .right-action {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* Ledger card */
+.ledger-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.ledger-title {
+  padding: 14px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  border-bottom: 1px solid #eee;
+}
+
+.ledger-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.ledger-item {
+  padding: 14px;
+  border-right: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.ledger-item:nth-child(2n) {
+  border-right: none;
+}
+
+.ledger-item:nth-last-child(-n+2) {
+  border-bottom: none;
+}
+
+.ledger-label {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.ledger-amount {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* Colors (match app style) */
+.ledger-green { color: #16a34a; }
+.ledger-teal  { color: #0d9488; }
+.ledger-yellow{ color: #f59e0b; }
+.ledger-red   { color: #dc2626; }
+
+/* ================= HOSTEL PAGE ================= */
+
+.hostel-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.hostel-header {
+  background: #000;
+  color: #fff;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.hostel-header a {
+  color: #fff;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+/* only content scrolls */
+.hostel-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 14px;
+}
+
+/* cards */
+.hostel-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  margin-bottom: 16px;
+}
+
+.hostel-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* detail rows */
+.hostel-row {
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.hostel-row b {
+  color: #111;
+}
+
+/* gate pass list */
+.gate-card {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.gate-status {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-ok {
+  background: #dcfce7;
+  color: #166534;
+}
+
+/* mess menu tabs */
+.mess-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin-bottom: 10px;
+}
+
+.mess-tabs button {
+  flex-shrink: 0;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  background: #e5e7eb;
+  font-size: 13px;
+}
+
+.mess-tabs button.active {
+  background: #000;
+  color: #fff;
+}
+
+/* mess menu box */
+.mess-box {
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  font-size: 13px;
+}
+/* ================= RESULTS PAGE ================= */
+
+.results-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.results-header {
+  background: #000;
+  color: #fff;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.results-header a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+/* only content scrolls */
+.results-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 14px;
+}
+
+/* semester card */
+.result-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  margin-bottom: 16px;
+}
+
+.result-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* subject rows */
+.subject-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.subject-name {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.subject-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #555;
+}
+
+/* grade badges */
+.grade {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.grade-pass { background:#e8fbe8; color:#1E9D32; }
+.grade-mid  { background:#eef3ff; color:#3454D1; }
+
+/* status alert */
+.result-alert {
+  background:#e8fbe8;
+  color:#166534;
+  font-weight:600;
+  padding:12px;
+  border-radius:12px;
+  margin-top:12px;
+  font-size:14px;
+}
+
+/* info box */
+.result-info {
+  background:#fff;
+  border-radius:14px;
+  padding:14px;
+  box-shadow:0 3px 10px rgba(0,0,0,0.08);
+  margin-top:14px;
+}
+
+.result-row {
+  display:flex;
+  justify-content:space-between;
+  padding:6px 0;
+  font-size:14px;
+}
+/* ================= TIME TABLE ================= */
+
+.timetable-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.timetable-header {
+  background: #000;
+  color: #fff;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.timetable-header a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+/* only content scrolls */
+.timetable-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 14px;
+}
+
+/* day card */
+.day-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  margin-bottom: 16px;
+}
+
+.day-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* slot */
+.slot {
+  border-left: 4px solid #2563eb;
+  padding: 10px;
+  margin-bottom: 8px;
+  background: #f8fafc;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+.slot-time {
+  font-size: 12px;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.slot-subject {
+  font-weight: 600;
+}
+
+/* recess */
+.recess {
+  text-align: center;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+/* ===== DAY SELECTOR (TIMETABLE) ===== */
+
+.day-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin-bottom: 12px;
+}
+
+.day-tabs button {
+  flex-shrink: 0;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  background: #e5e7eb;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.day-tabs button.active {
+  background: #000;
+  color: #fff;
+}
+/* ===== STAFF DETAILS ===== */
+.staff-row {
+  font-size: 13px;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+.staff-row span {
+  font-size: 12px;
+  color: #2563eb;
+}
+.staff-row:last-child {
+  border-bottom: none;
+}
+/* ===== ERP STAFF DETAILS ===== */
+
+.staff-card {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.staff-code {
+  font-weight: 700;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.staff-name {
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.staff-subject {
+  font-size: 12px;
+  color: #475569;
+  margin-top: 2px;
+}
+
+.staff-mail {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #2563eb;
+  text-decoration: none;
+}
+/* ===== EXAM SCHEDULE ===== */
+
+.exam-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.exam-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px;
+  background: #111;
+}
+
+.exam-card {
+  background: linear-gradient(180deg, #0f0f0f, #141414);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.exam-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding-bottom: 8px;
+}
+
+.exam-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.exam-label {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.exam-value {
+  font-size: 32px;
+  font-weight: 800;
+  margin-top: 4px;
+}
+
+.exam-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.score-box {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+
+.score-label {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.score-value {
+  font-size: 30px;
+  font-weight: 800;
+  color: #818cf8;
+}
+
+.accuracy {
+  text-align: right;
+}
+
+.accuracy-label {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.accuracy-value {
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.accuracy-value.green {
+  color: #22c55e;
+}
+/* ===== PLACEMENTS ===== */
+
+.placements-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.placements-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px;
+  background: #111;
+  color: #fff;
+}
+
+.placement-hint {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 20px;
+  color: #9ca3af;
+}
+
+/* Gallery */
+.placement-gallery {
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.placement-gallery.show {
+  display: grid;
+}
+
+.placement-gallery img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+/* ===== NOTIFICATIONS ===== */
+
+.notification-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.notification-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  background: #f4f5f7;
+}
+
+.notify-card {
+  display: flex;
+  gap: 10px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+.notify-icon {
+  font-size: 22px;
+}
+
+.notify-body {
+  flex: 1;
+  font-size: 14px;
+}
+
+.notify-date {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.notify-title {
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.notify-text {
+  font-size: 13px;
+  line-height: 1.5;
+  max-height: 90px;
+  overflow: hidden;
+}
+
+.notify-text.expanded {
+  max-height: none;
+}
+
+.toggle-btn {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #2563eb;
+  cursor: pointer;
+}
+/* ===== SIMPLE DASHBOARD HEADER ===== */
+.dashboard-header.simple {
+  text-align: center;
+  padding: 16px;
+}
+.status-badge {
+  background: #f59e0b;
+  color: #fff;
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+/* ===== PROFILE PAGE ===== */
+.profile-header {
+  background: linear-gradient(180deg,#0f172a,#020617);
+  color: #fff;
+  text-align: center;
+  padding: 30px 16px 20px;
+  position: relative;
+}
+.profile-header .back-btn {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+}
+.profile-pic {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+.profile-header .status {
+  background: #f59e0b;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+.profile-content {
+  padding: 14px;
+  background: #f4f5f7;
+}
+
+.section h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.info-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  font-size: 14px;
+}
+.info-card div {
+  line-height: 1.4;
+}
+/* ===== LOGOUT BUTTON ===== */
+
+.logout-btn {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  font-size: 13px;
+  text-decoration: none;
+  color: #ef4444;
+  font-weight: 600;
+}
+/* ===== APP HEADER ===== */
+.app-header {
+    height: 56px;
+    background: #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 12px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* ===== ERP TOP BAR ===== */
+
+.erp-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 52px;
+  background: #0f172a;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  gap: 12px;
+}
+
+/* Back button */
+.erp-back {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+/* Page title */
+.erp-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+}
+/* ===============================
+   GNUMS – Compact Dashboard Header
+   =============================== */
+
+.dashboard-header.simple {
+    background: #000;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+/* Top black bar */
+.app-top-bar {
+    height: 48px;
+    background: #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+}
+
+/* App title */
+.app-name {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Logout button */
+.logout-btn {
+    color: #ff4d4d;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+/* Profile image – medium size */
+.dash-profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 14px;
+    border: 3px solid #fff;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+}
+
+/* Name & status spacing */
+.dashboard-header .name {
+    margin-top: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.dashboard-header .status-badge {
+    margin-top: 4px;
+}
+
+/* Mobile optimization */
+@media (max-width: 480px) {
+    .dash-profile-pic {
+        width: 110px;
+        height: 110px;
+    }
+                                }
+
+/* FEE TAB SWITCHING PAGE LAYOUT */
+.fees-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.fees-content {
+  padding: 12px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* LEDGER */
+.ledger-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+.ledger-title {
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.ledger-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.ledger-item {
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.ledger-teal { background: #e0f2f1; color: #00695c; }
+.ledger-green { background: #e8f5e9; color: #2e7d32; }
+.ledger-yellow { background: #fff8e1; color: #f9a825; }
+.ledger-red { background: #fdecea; color: #c62828; }
+
+/* TABS */
+.fee-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.fee-tab {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #f5f5f5;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.fee-tab.active {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+/* FEES */
+.fees-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.fees-title {
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.fee-block {
+  margin-bottom: 14px;
+}
+
+.fee-block-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.fee-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  padding: 4px 0;
+}
+
+.fee-total {
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+/* ===== ERP TOP BAR FIX ===== */
+.erp-topbar {
+  height: 52px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+/* BACK BUTTON */
+.erp-back {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #000;
+  font-size: 22px;
+}
+
+/* ICON SAFETY */
+.erp-back i {
+  font-size: 22px;
+  line-height: 1;
+}
+
+/* TITLE CENTERED */
+.erp-title {
+  flex: 1;
+  text-align: center;
+  font-weight: 700;
+  font-size: 15px;
+  margin-right: 36px; /* balances back button */
+}
+
+
+
