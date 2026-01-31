@@ -31,7 +31,7 @@
 
     <!-- INFO -->
     <div style="background:#000;color:#fff;padding:12px;border-radius:10px;text-align:center;font-weight:600;font-size:14px;margin-bottom:12px;">
-      Attendance updates daily at 3:00 AM • Weekly summary below
+      Attendance updates daily at 3:00 AM • semester summary below
     </div>
 
     <!-- OVERALL CARD -->
@@ -73,6 +73,7 @@
    ========================= */
 
 const attendance = {
+  "2026-01-30":["P","A","A","A","-"],
   "2026-01-29":["P","A","A","A","A"],
   "2026-01-27":["A","A","A","A","-"],
   "2026-01-24":["A","A","A","A","-"],
@@ -165,19 +166,23 @@ Object.entries(attendance).forEach(([date, slots]) => {
    ========================= */
 
 const subjects = {
-  "Operating Systems":            { present:18, total:22 },
-  "Operating Systems Lab":        { present:4,  total:6  },
-  "Python":                       { present:11, total:18 },
-  "Python Lab":                   { present:3,  total:8  },
-  "Networking":                   { present:13, total:18 },
-  "Networking Lab":               { present:4,  total:7  },
-  "Software Engineering":         { present:13, total:20 },
-  "Software Engineering Lab":     { present:4,  total:9  },
-  "Cryptography":                 { present:10, total:16 },
-  "Cryptography Lab":             { present:1,  total:3  },
-  "PGPD":                         { present:4,  total:6  },
-  "PALO ALTO COURSE":             { present:2,  total:3  }
+  
+  "Operating Systems":            { "present": 18, "total": 26 },
+  "Operating Systems Lab":        { "present": 5,  "total": 7  },
+  "Software Engineering":         { "present": 13, "total": 23 },
+  "Software Engineering Lab":     { "present": 4,  "total": 10  },
+  "Python":                        { "present": 12, "total": 22 },
+  "Python Lab":                    { "present": 3,  "total": 8  },
+  "Networking":                    { "present": 13, "total": 23 },
+  "Networking Lab":                { "present": 4,  "total": 7  },
+  "Cryptography":                  { "present": 10, "total": 20 },
+  "Cryptography Lab":              { "present": 1,  "total": 4  },
+  "PGPD":                           { "present": 4,  "total": 8  },
+  "PALO ALTO COURSE":              { "present": 2,  "total": 4  }
 };
+  
+
+
 
 const subjectContainer = document.getElementById("subjectContainer");
 
