@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +6,30 @@
   <title>Results</title>
 
   <link rel="stylesheet" href="../assets/css/common.css">
+
+  <style>
+    .semester-list {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .semester-link {
+      display: block;
+      padding: 14px;
+      background: #f7f9fc;
+      border-radius: 10px;
+      text-decoration: none;
+      color: #000;
+      font-weight: 600;
+      border: 1px solid #e0e0e0;
+    }
+
+    .semester-link:hover {
+      background: #eef3ff;
+    }
+  </style>
 </head>
 <body>
 
@@ -15,94 +37,43 @@
 
   <!-- HEADER -->
   <div class="results-header">
-    <a href="dashboard.html">←</a>
+    <a href="dashboard.html">Back</a>
     Results
   </div>
 
-  <!-- TOP NOTICE BAR -->
-<div class="top-notice">
-  <span class="top-notice-text">
-    NOTE: “The examination results will be announced shortly. Students are advised to stay updated.”.
-  </span>
-</div>
-
+  <!-- TOP NOTICE -->
+  <div class="top-notice">
+    <span class="top-notice-text">
+      NOTE: The examination results will be announced shortly. Students are advised to stay updated.
+    </span>
+  </div>
 
   <!-- CONTENT -->
   <div class="results-content">
 
     <div class="result-card">
-      <div class="result-title">Semester - 2 Result</div>
 
-      <!-- SUBJECTS -->
-      <div class="subject-card">
-        <div class="subject-name">Computational Thinking for Structured Design-2</div>
-        <div class="subject-meta">
-          <span>Code: 303105151 • Credit: 4.00</span>
-          <span class="grade grade-pass">B</span>
-        </div>
+      <div class="result-title">Profile</div>
+
+      <div style="margin-bottom:10px;">
+        <b>Valluri Sri Krishna Vardan</b><br>
+        <span style="font-size:14px;color:#666;">
+          2403031260215@paruluniversity.ac.in
+        </span>
       </div>
 
-      <div class="subject-card">
-        <div class="subject-name">Global Certifications – Azure, AWS, GCP</div>
-        <div class="subject-meta">
-          <span>Code: 303105153 • Credit: 2.00</span>
-          <span class="grade grade-pass">A+</span>
-        </div>
-      </div>
+      <hr>
 
-      <div class="subject-card">
-        <div class="subject-name">Mastering Kali Linux and OSINT</div>
-        <div class="subject-meta">
-          <span>Code: 303105154 • Credit: 3.00</span>
-          <span class="grade grade-pass">B</span>
-        </div>
-      </div>
-
-      <div class="subject-card">
-        <div class="subject-name">ICT Workshop</div>
-        <div class="subject-meta">
-          <span>Code: 303107152 • Credit: 1.00</span>
-          <span class="grade grade-pass">B+</span>
-        </div>
-      </div>
-
-      <div class="subject-card">
-        <div class="subject-name">Mathematics-II</div>
-        <div class="subject-meta">
-          <span>Code: 303191151 • Credit: 4.00</span>
-          <span class="grade grade-pass">B</span>
-        </div>
-      </div>
-
-      <div class="subject-card">
-        <div class="subject-name">Engineering Physics-II</div>
-        <div class="subject-meta">
-          <span>Code: 303191202 • Credit: 4.00</span>
-          <span class="grade grade-pass">B+</span>
-        </div>
-      </div>
-
-      <div class="subject-card">
-        <div class="subject-name">Advanced Communication & Technical Writing</div>
-        <div class="subject-meta">
-          <span>Code: 303193152 • Credit: 2.00</span>
-          <span class="grade grade-pass">A</span>
-        </div>
-      </div>
-
-      <!-- STATUS -->
-      <div class="result-alert">
-        ✅ PROMOTED TO 3RD SEMESTER (0 BACKLOGS)
-      </div>
-
-      <!-- INFO -->
+      <!-- CREDITS -->
       <div class="result-info">
-        <div class="result-row"><span>Seat No</span><b>AF23604</b></div>
-        <div class="result-row"><span>Name</span><b>VALLURI SRI KRISHNA VARDAN</b></div>
-        <div class="result-row"><span>Current Backlog</span><b>0</b></div>
-        <div class="result-row"><span>Total Backlog</span><b>0</b></div>
-        <div class="result-row"><span>SGPA</span><b>6.75</b></div>
-        <div class="result-row"><span>CGPA</span><b>6.92</b></div>
+        <div class="result-row"><span>Credits Earned</span><b>—</b></div>
+        <div class="result-row"><span>Credits Attempted</span><b>—</b></div>
+      </div>
+
+      <!-- SEMESTERS -->
+      <div class="semester-list">
+        <a href="sem-1.html" class="semester-link">Semester 1</a>
+        <a href="sem-2.html" class="semester-link">Semester 2</a>
       </div>
 
     </div>
@@ -112,4 +83,3 @@
 
 </body>
 </html>
-
