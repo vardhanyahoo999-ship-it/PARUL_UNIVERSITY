@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome | Elite Portal</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #6366f1;
+      --glass: rgba(255, 255, 255, 0.1);
+      --glass-border: rgba(255, 255, 255, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: #0f172a; /* Fallback deep slate */
+      background-image: url("assets/images/college_photo.jpg");
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    /* Cinematic Overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0.9) 100%);
+      backdrop-filter: blur(4px);
+      z-index: 0;
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Logo & Branding Animation */
+    .brand-container {
+      margin-bottom: 40px;
+    }
+
+    .logo {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 4px;
+      background: linear-gradient(to bottom, #ffffff, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: revealDown 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    }
+
+    .tagline {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      color: var(--primary);
+      text-transform: uppercase;
+      opacity: 0;
+      animation: revealUp 1s cubic-bezier(0.23, 1, 0.32, 1) 0.3s forwards;
+    }
+
+    /* Modern Progress Bar */
+    .loader-container {
+      width: 200px;
+      height: 4px;
+      background: var(--glass);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 20px auto;
+      border: 1px solid var(--glass-border);
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background: var(--primary);
+      box-shadow: 0 0 15px var(--primary);
+      animation: progressLoad 2s ease-in-out forwards;
+    }
+
+    .loading-text {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.6;
+      animation: pulse 1.5s infinite;
+    }
+
+    /* Keyframes */
+    @keyframes revealDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes revealUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes progressLoad {
+      0% { width: 0%; }
+      100% { width: 100%; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+
+    /* Smooth exit animation for script redirect */
+    .fade-out {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+  </style>
+
+  <script>
+    window.onload = function() {
+      setTimeout(function() {
+        document.body.classList.add('fade-out');
+        setTimeout(function() {
+          window.location.replace("student/dashboard.html");
+        }, 500);
+      }, 2200); // 2.2 seconds total splash time
+    };
+  </script>
+</head>
+
+<body>
+
+  <div class="content-wrapper">
+    <div class="brand-container">
+      <div class="logo">PARUL UNIVERSITY</div>
+      <div class="tagline">PIET Portal</div>
+    </div>
+
+    <div class="loader-container">
+      <div class="progress-bar"></div>
+    </div>
+    <div class="loading-text">Initializing Secure Session...</div>
+  </div>
+
+</body>
+</html>

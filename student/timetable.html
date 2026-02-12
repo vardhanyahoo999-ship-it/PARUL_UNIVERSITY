@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Time Table | Elite Portal</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Deep Modern Palette */
+      --primary: #6366f1;
+      --primary-glow: rgba(99, 102, 241, 0.4);
+      --bg-slate: #f8fafc;
+      --glass-surface: rgba(255, 255, 255, 0.7);
+      --glass-stroke: rgba(255, 255, 255, 0.9);
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      
+      /* Mesh Gradient Animation Colors */
+      --mesh-1: rgba(99, 102, 241, 0.1);
+      --mesh-2: rgba(244, 63, 94, 0.05);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg-slate);
+      background-image: 
+        radial-gradient(at 0% 0%, var(--mesh-1) 0, transparent 40%),
+        radial-gradient(at 100% 100%, var(--mesh-2) 0, transparent 40%);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* --- CRYSTAL NAVIGATION --- */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--glass-surface);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-stroke);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      height: 72px;
+      justify-content: space-between;
+    }
+
+    .nav-brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.5px; }
+    .nav-brand i { color: var(--primary); font-size: 1.4rem; }
+
+    .btn-back {
+      height: 40px; width: 40px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 14px; background: #fff;
+      border: 1px solid var(--glass-stroke);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      color: var(--text-main); text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-back:hover { transform: translateX(-4px); background: var(--primary); color: #fff; }
+
+    /* --- MODERN DAY PICKER --- */
+    .day-selector {
+      display: flex; gap: 10px;
+      padding: 24px 5%;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .day-selector::-webkit-scrollbar { display: none; }
+
+    .day-btn {
+      flex: 0 0 70px;
+      padding: 14px 0;
+      border-radius: 20px;
+      border: 1px solid var(--glass-stroke);
+      background: var(--glass-surface);
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .day-btn.active {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 12px 24px var(--primary-glow);
+      transform: translateY(-4px) scale(1.05);
+    }
+
+    /* --- TIMELINE DESIGN --- */
+    .content-wrapper { max-width: 850px; margin: 0 auto; padding: 0 5% 40px; }
+
+    .timetable-card {
+      background: var(--glass-surface);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-stroke);
+      border-radius: 32px;
+      padding: 30px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+      display: none;
+      transform-origin: top;
+    }
+    .timetable-card.active-day { display: block; animation: slideIn 0.5s ease forwards; }
+
+    .slot { display: flex; gap: 24px; padding: 12px 0; align-items: center; }
+    
+    .slot-time {
+      width: 85px; text-align: right;
+      font-size: 0.75rem; font-weight: 800; color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+
+    .slot-content {
+      flex: 1; padding: 16px 20px;
+      background: #fff;
+      border-radius: 20px;
+      border-left: 5px solid var(--primary);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      transition: transform 0.3s ease;
+    }
+    .slot-content:hover { transform: scale(1.02); }
+    .slot-subject { font-weight: 700; font-size: 1rem; }
+
+    .recess-marker {
+      margin: 16px 0; padding: 10px;
+      background: rgba(99, 102, 241, 0.05);
+      border: 1px dashed var(--primary);
+      border-radius: 16px;
+      text-align: center;
+      font-size: 0.7rem; font-weight: 800; color: var(--primary);
+      text-transform: uppercase; letter-spacing: 2px;
+    }
+
+    /* --- FACULTY CARDS --- */
+    .faculty-section { margin-top: 50px; }
+    .faculty-section h3 { font-weight: 800; font-size: 1.2rem; margin-bottom: 24px; }
+    
+    .faculty-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+
+    .faculty-card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 20px;
+      display: flex; align-items: center; gap: 16px;
+      border: 1px solid var(--glass-stroke);
+      transition: all 0.3s ease;
+    }
+    .faculty-card:hover { border-color: var(--primary); box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+
+    .f-avatar {
+      width: 52px; height: 52px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1.2rem;
+    }
+
+    .f-info h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 2px; }
+    .f-info p { font-size: 0.75rem; color: var(--text-muted); font-weight: 500; }
+    .f-mail { font-size: 0.75rem; color: var(--primary); text-decoration: none; font-weight: 600; }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(15px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-brand">
+      <a href="dashboard.html" class="btn-back"><i class="bi bi-arrow-left-short"></i></a>
+      <span>ACADEMIC <span style="font-weight: 300; opacity: 0.6;">TIME TABLE</span></span>
+    </div>
+    <div style="font-size: 1.3rem;"><i class="bi bi-calendar3-event"></i></div>
+  </nav>
+
+  <div class="day-selector">
+    <button id="btn-mon" class="day-btn" onclick="openDay('mon', this)">Mon</button>
+    <button id="btn-tue" class="day-btn" onclick="openDay('tue', this)">Tue</button>
+    <button id="btn-wed" class="day-btn" onclick="openDay('wed', this)">Wed</button>
+    <button id="btn-thu" class="day-btn" onclick="openDay('thu', this)">Thu</button>
+    <button id="btn-fri" class="day-btn" onclick="openDay('fri', this)">Fri</button>
+    <button id="btn-sat" class="day-btn" onclick="openDay('sat', this)">Sat</button>
+  </div>
+
+  <div class="content-wrapper">
+    
+    <div class="timetable-card" id="mon">
+      <div class="slot"><div class="slot-time">09:30 AM</div><div class="slot-content"><div class="slot-subject">SE – NW</div></div></div>
+      <div class="slot"><div class="slot-time">10:25 AM</div><div class="slot-content"><div class="slot-subject">OS – TP</div></div></div>
+      <div class="recess-marker">Break • 11:20 — 12:20</div>
+      <div class="slot"><div class="slot-time">12:20 PM</div><div class="slot-content"><div class="slot-subject">NSC – KB</div></div></div>
+      <div class="slot"><div class="slot-time">01:15 PM</div><div class="slot-content"><div class="slot-subject">SE – NW</div></div></div>
+      <div class="recess-marker">Short Break • 02:10 — 02:30</div>
+      <div class="slot"><div class="slot-time">02:30 PM</div><div class="slot-content"><div class="slot-subject">CRY – DC</div></div></div>
+      <div class="slot"><div class="slot-time">03:25 PM</div><div class="slot-content"><div class="slot-subject">SE – NW</div></div></div>
+    </div>
+
+    <div class="timetable-card" id="tue">
+      <div class="slot"><div class="slot-time">09:30 AM</div><div class="slot-content"><div class="slot-subject">PPFD – RK</div></div></div>
+      <div class="recess-marker">Lunch Break</div>
+      <div class="slot"><div class="slot-time">12:20 PM</div><div class="slot-content"><div class="slot-subject">NSC – KB</div></div></div>
+      <div class="recess-marker">Break</div>
+      <div class="slot"><div class="slot-time">02:30 PM</div><div class="slot-content"><div class="slot-subject">OS – TP</div></div></div>
+    </div>
+
+    <div class="timetable-card" id="wed">
+      <div class="slot"><div class="slot-time">09:30 AM</div><div class="slot-content"><div class="slot-subject">CODECHEF (Full Session)</div></div></div>
+    </div>
+
+    <div class="timetable-card" id="thu">
+      <div class="slot"><div class="slot-time">09:30 AM</div><div class="slot-content"><div class="slot-subject">OS – TP</div></div></div>
+      <div class="recess-marker">Break</div>
+      <div class="slot"><div class="slot-time">12:20 PM</div><div class="slot-content"><div class="slot-subject">PPFD – RK</div></div></div>
+    </div>
+
+    <div class="timetable-card" id="fri">
+      <div class="slot"><div class="slot-time">09:30 AM</div><div class="slot-content"><div class="slot-subject">LIBRARY</div></div></div>
+      <div class="recess-marker">Lunch Break</div>
+      <div class="slot"><div class="slot-time">12:20 PM</div><div class="slot-content"><div class="slot-subject">OS – TP</div></div></div>
+      <div class="recess-marker">Break</div>
+      <div class="slot"><div class="slot-time">02:30 PM</div><div class="slot-content"><div class="slot-subject">CRY – DC</div></div></div>
+    </div>
+
+    <div class="timetable-card" id="sat">
+      <div class="slot"><div class="slot-time">09:30 AM</div><div class="slot-content"><div class="slot-subject">NSC – KB</div></div></div>
+      <div class="slot"><div class="slot-time">10:25 AM</div><div class="slot-content"><div class="slot-subject">PPFD – RK</div></div></div>
+      <div class="slot"><div class="slot-time">12:20 PM</div><div class="slot-content"><div class="slot-subject">PALO ALTO – AJ</div></div></div>
+      <div class="slot"><div class="slot-time">02:30 PM</div><div class="slot-content"><div class="slot-subject">CRY – DC</div></div></div>
+    </div>
+
+    <section class="faculty-section">
+      <h3>Faculties</h3>
+      <div class="faculty-grid">
+        <div class="faculty-card">
+          <div class="f-avatar">NW</div>
+          <div class="f-info">
+            <h4>Ms. Neha Wagh</h4>
+            <p>Software Engineering</p>
+            <a href="mailto:nwaghmare@piet.edu" class="f-mail">nwaghmare@piet.edu</a>
+          </div>
+        </div>
+        <div class="faculty-card">
+          <div class="f-avatar">TP</div>
+          <div class="f-info">
+            <h4>Ms. Tanvi Patel</h4>
+            <p>Operating Systems</p>
+            <a href="mailto:tpatil@piet.edu" class="f-mail">tpatil@piet.edu</a>
+          </div>
+        </div>
+        <div class="faculty-card">
+          <div class="f-avatar">DC</div>
+          <div class="f-info">
+            <h4>Mr. D. Chakraborty</h4>
+            <p>Cryptography</p>
+            <a href="mailto:debojyoti@piet.edu" class="f-mail">debojyoti@piet.edu</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function openDay(dayId, btn) {
+      document.querySelectorAll('.timetable-card').forEach(card => card.classList.remove('active-day'));
+      document.getElementById(dayId).classList.add('active-day');
+      document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    // Smart load: auto-opens today
+    window.onload = () => {
+      const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+      let today = days[new Date().getDay()];
+      if (today === 'sun') today = 'mon'; // Show monday if it's sunday
+      const btn = document.getElementById('btn-' + today);
+      if (btn) openDay(today, btn);
+    };
+  </script>
+</body>
+</html>

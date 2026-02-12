@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Hostel Elite | Dashboard</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-glow: rgba(99, 102, 241, 0.3);
+      --glass: rgba(255, 255, 255, 0.75);
+      --glass-border: rgba(255, 255, 255, 0.5);
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --bg-mesh: radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0, transparent 50%), 
+                 radial-gradient(at 100% 0%, rgba(244, 63, 94, 0.1) 0, transparent 50%),
+                 radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.1) 0, transparent 50%),
+                 radial-gradient(at 0% 100%, rgba(244, 63, 94, 0.05) 0, transparent 50%);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f8fafc;
+      background-image: var(--bg-mesh);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    /* --- NAVIGATION --- */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--glass);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 0.75rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    /* Premium Button Styles */
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: white;
+      color: var(--text-main);
+      text-decoration: none;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+      transition: all 0.3s ease;
+    }
+
+    .icon-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px var(--primary-glow);
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* --- CONTENT WRAPPERS --- */
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 1024px) {
+      .container { grid-template-columns: 350px 1fr; }
+    }
+
+    .premium-card {
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 32px;
+      padding: 2rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.03);
+    }
+
+    .card-title {
+      font-weight: 800;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* --- INFO TILES & TICKETS --- */
+    .data-row { margin-bottom: 1.25rem; display: flex; flex-direction: column; }
+    .data-label { font-size: 0.65rem; text-transform: uppercase; font-weight: 800; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 4px; }
+    .data-value { font-weight: 600; font-size: 1rem; }
+
+    .ticket-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+    .pass-ticket { background: white; border-radius: 24px; padding: 1.5rem; border: 1px solid rgba(0,0,0,0.03); position: relative; transition: all 0.4s ease; }
+    .pass-ticket:hover { transform: translateY(-5px); box-shadow: 0 20px 30px -10px var(--primary-glow); border-color: var(--primary); }
+    .status-pill { display: inline-block; padding: 4px 10px; border-radius: 8px; font-size: 0.7rem; font-weight: 800; background: #f0fdf4; color: #166534; margin-bottom: 1rem; }
+
+    /* --- ANIMATION --- */
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-in { animation: fadeInUp 0.6s ease forwards; }
+
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-left">
+      <a href="dashboard.html" class="icon-btn">
+        <i class="bi bi-chevron-left"></i>
+      </a>
+      <div class="logo">
+        <span style="color: var(--primary);">HOSTEL</span><span>ELITE</span>
+      </div>
+    </div>
+    
+    <div class="nav-right">
+      <a href="profile.html" class="icon-btn">
+        <i class="bi bi-person-fill"></i>
+      </a>
+    </div>
+  </nav>
+
+  <div class="container">
+    
+    <aside class="premium-card animate-in">
+      <h2 class="card-title"><i class="bi bi-shield-check"></i> Residence Profile</h2>
+      <div class="data-row">
+        <span class="data-label">Registration</span>
+        <span class="data-value">#42043</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">Assigned Wing</span>
+        <span class="data-value">Tagore Bhawan - C</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">Room Allocation</span>
+        <span class="data-value">C-361 | Bed 03</span>
+      </div>
+    </aside>
+
+    <main>
+      <div class="premium-card animate-in" style="animation-delay: 0.1s;">
+        <h2 class="card-title"><i class="bi bi-ticket-perforated"></i> Recent Gate Passes</h2>
+        <div class="ticket-grid">
+          <div class="pass-ticket">
+            <span class="status-pill">APPROVED</span>
+            <span style="font-weight:700; display:block;">Sankranti Vacation</span>
+            <small style="color:var(--text-muted)">08 Jan — 20 Jan</small>
+          </div>
+          <div class="pass-ticket">
+            <span class="status-pill">APPROVED</span>
+            <span style="font-weight:700; display:block;">Diwali Holidays</span>
+            <small style="color:var(--text-muted)">17 Oct — 02 Nov</small>
+          </div>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+</body>
+</html>

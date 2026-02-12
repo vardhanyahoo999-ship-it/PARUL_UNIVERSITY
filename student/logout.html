@@ -1,0 +1,15 @@
+<?php
+session_start();
+
+/* Destroy session */
+$_SESSION = [];
+session_destroy();
+
+/* Remove login cookie if exists */
+if (isset($_COOKIE['student_login'])) {
+  setcookie('student_login', '', time() - 3600, '/');
+}
+
+/* Redirect to login page */
+header("Location: ../index.php");
+exit;

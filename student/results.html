@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Academic Results | Elite Portal</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-glow: rgba(99, 102, 241, 0.3);
+      --glass: rgba(255, 255, 255, 0.75);
+      --glass-border: rgba(255, 255, 255, 0.5);
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --bg-mesh: radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.12) 0, transparent 50%), 
+                 radial-gradient(at 100% 100%, rgba(244, 63, 94, 0.08) 0, transparent 50%);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f8fafc;
+      background-image: var(--bg-mesh);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding-bottom: 50px;
+    }
+
+    /* --- CRYSTAL NAV --- */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--glass);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 0.75rem 5%;
+      display: flex;
+      align-items: center;
+      height: 70px;
+      gap: 20px;
+    }
+
+    .back-btn {
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 12px; background: white; color: var(--text-main);
+      text-decoration: none; border: 1px solid var(--glass-border);
+      transition: 0.3s;
+    }
+    .back-btn:hover { background: var(--primary); color: white; transform: translateX(-3px); }
+
+    /* --- ALERT BANNER --- */
+    .notice-banner {
+      margin: 20px 5%;
+      padding: 14px 20px;
+      background: linear-gradient(90deg, #6366f1, #a855f7);
+      color: white;
+      border-radius: 18px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+      animation: slideIn 0.6s ease;
+    }
+
+    /* --- CONTENT --- */
+    .container { max-width: 800px; margin: 0 auto; padding: 0 5%; }
+
+    /* PROFILE CARD */
+    .premium-card {
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 30px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+    }
+
+    .profile-info h2 { font-size: 1.25rem; font-weight: 800; margin-bottom: 4px; letter-spacing: -0.5px; }
+    .profile-info p { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
+
+    /* CREDIT DASHBOARD */
+    .credit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .credit-stat {
+      background: white;
+      padding: 18px;
+      border-radius: 20px;
+      border: 1px solid var(--glass-border);
+      text-align: center;
+    }
+
+    .credit-stat label { display: block; font-size: 0.65rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+    .credit-stat span { font-size: 1.5rem; font-weight: 800; color: var(--primary); }
+
+    /* SEMESTER TILES */
+    .semester-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .semester-tile {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      background: white;
+      border-radius: 20px;
+      text-decoration: none;
+      color: var(--text-main);
+      border: 1px solid transparent;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .semester-tile:hover {
+      transform: translateY(-3px);
+      border-color: var(--primary);
+      box-shadow: 0 10px 20px rgba(99, 102, 241, 0.1);
+    }
+
+    .sem-meta { display: flex; align-items: center; gap: 15px; }
+    .sem-icon { 
+      width: 40px; height: 40px; 
+      background: var(--primary-soft); 
+      color: var(--primary); 
+      border-radius: 12px; 
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .sem-name { font-weight: 700; font-size: 0.95rem; }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="dashboard.html" class="back-btn"><i class="bi bi-chevron-left"></i></a>
+    <span style="font-weight: 800; font-size: 1.1rem;">Academic Results</span>
+  </nav>
+
+  <div class="notice-banner">
+    <i class="bi bi-megaphone-fill"></i>
+    <span>Sem-3 Results are declared! Check your grades below.</span>
+  </div>
+
+  <div class="container">
+    
+    <div class="premium-card">
+      <div class="profile-info">
+        <h2>Valluri Sri Krishna Vardan</h2>
+        <p>2403031260215@paruluniversity.ac.in</p>
+      </div>
+
+      <div class="credit-grid">
+        <div class="credit-stat">
+          <label>Credits Earned</label>
+          <span>19</span>
+        </div>
+        <div class="credit-stat">
+          <label>Credits Attempted</label>
+          <span>23</span>
+        </div>
+      </div>
+
+      <h3 style="font-size: 0.85rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin: 25px 0 15px 5px;">Semester Records</h3>
+      
+      <div class="semester-list">
+        <a href="sem-1.html" class="semester-tile">
+          <div class="sem-meta">
+            <div class="sem-icon"><i class="bi bi-1-circle-fill"></i></div>
+            <span class="sem-name">Semester 1</span>
+          </div>
+          <i class="bi bi-chevron-right"></i>
+        </a>
+
+        <a href="sem-1supply.html" class="semester-tile">
+          <div class="sem-meta">
+            <div class="sem-icon" style="background: #fff1f2; color: #f43f5e;"><i class="bi bi-arrow-repeat"></i></div>
+            <span class="sem-name">Semester 1 Supplementary</span>
+          </div>
+          <i class="bi bi-chevron-right"></i>
+        </a>
+
+        <a href="sem-2.html" class="semester-tile">
+          <div class="sem-meta">
+            <div class="sem-icon"><i class="bi bi-2-circle-fill"></i></div>
+            <span class="sem-name">Semester 2</span>
+          </div>
+          <i class="bi bi-chevron-right"></i>
+        </a>
+
+        <a href="sem-3.html" class="semester-tile" style="border: 1px solid var(--primary-glow); background: var(--primary-soft);">
+          <div class="sem-meta">
+            <div class="sem-icon" style="background: var(--primary); color: white;"><i class="bi bi-stars"></i></div>
+            <span class="sem-name" style="color: var(--primary);">Semester 3 (Latest)</span>
+          </div>
+          <i class="bi bi-chevron-right" style="color: var(--primary);"></i>
+        </a>
+      </div>
+
+      <div class="footer-note">
+        <i class="bi bi-info-circle"></i><br>
+        To download official Marklist or Transcripts, please<br>
+        access the <b>GNUMS WEB PORTAL</b> on a desktop.
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
